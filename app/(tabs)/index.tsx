@@ -79,7 +79,7 @@ export default function SpeseScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         ListEmptyComponent={
-          loading ? null : (
+          loading ? undefined : (
             <Text style={{ color: colors.muted, textAlign: 'center', marginTop: 24 }}>
               Nessuna spesa con questi filtri.
             </Text>

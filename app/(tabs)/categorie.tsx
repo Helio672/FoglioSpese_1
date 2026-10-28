@@ -95,7 +95,7 @@ export default function CategorieScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         ListEmptyComponent={
-          loading ? null : (
+          loading ? undefined : (
             <Text style={[styles.emptyText, { color: colors.muted }]}>
               Nessuna categoria presente. Creane una con il pulsante in basso.
             </Text>

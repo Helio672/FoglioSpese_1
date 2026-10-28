@@ -104,7 +104,7 @@ export default function SottocategorieScreen() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.list}
           ListEmptyComponent={
-            loading ? null : (
+            loading ? undefined : (
               <Text style={[styles.emptyText, { color: colors.muted }]}>
                 Nessuna sottocategoria presente. Aggiungine una con il pulsante in basso.
               </Text>
