@@ -39,3 +39,11 @@ Docs: https://docs.expo.dev/eas/index.md
 - If `ios/` and `android/` directories do not exist, they are generated (Continuous Native Generation). Never create or edit them by hand — configure native behavior in `app.json` and config plugins.
 - Expo Go only includes its bundled native modules. After adding a library with native code, the app needs a development build: `npx expo run:ios|android` locally, or `eas build --profile development`.
 - Prefer recommended Expo modules over third-party libraries, and check your available skills before adding dependencies. Docs: https://docs.expo.dev/versions/latest/index.md
+
+## Git workflow and previews
+
+- Never push directly to `dev` or `main`.
+- For each batch of requested changes: work on a separate branch (e.g. `feat/<description>` or `fix/<description>`), commit and push that branch, then open a pull request targeting `dev`.
+- Opening the PR triggers the "EAS Update Preview" GitHub Action (`.github/workflows/preview.yml`), which publishes a preview to Expo.dev and posts a comment with the link and QR code. Share that link with the user once it is ready.
+- Before opening the PR, run `npx expo lint` and `npx tsc --noEmit`.
+- If the action fails, check the job logs. The most common cause is the `EXPO_TOKEN` secret, which must be a token from the `helio672` account with access to the project.
