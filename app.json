@@ -39,6 +39,23 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "c33e467d-fbba-43ef-962b-422d14197014"
+      }
+    },
+    "owner": "helio672",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/c33e467d-fbba-43ef-962b-422d14197014"
     }
   }
 }
