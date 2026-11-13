@@ -1,8 +1,8 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 
-const MIGRATION_V1 = `
-PRAGMA foreign_keys = ON;
+export type Migration = { version: number; sql: string };
 
+const MIGRATION_V1 = `
 CREATE TABLE IF NOT EXISTS categories (
   id TEXT PRIMARY KEY NOT NULL,
   name TEXT NOT NULL,
@@ -38,6 +38,30 @@ CREATE INDEX IF NOT EXISTS idx_expenses_subcategory ON expenses(subcategory_id);
 CREATE INDEX IF NOT EXISTS idx_subcategories_category ON subcategories(category_id);
 `;
 
-export async function migrate(sqlite: SQLiteDatabase): Promise<void> {
-  await sqlite.execAsync(MIGRATION_V1);
+/** Elenco ordinato delle migrazioni. Una migrazione rilasciata non si modifica: se ne aggiunge un'altra. */
+export const MIGRATIONS: Migration[] = [{ version: 1, sql: MIGRATION_V1 }];
+
+async function readUserVersion(sqlite: SQLiteDatabase): Promise<number> {
+  const row = await sqlite.getFirstAsync<{ user_version: number }>('PRAGMA user_version');
+  return row?.user_version ?? 0;
+}
+
+export async function migrate(
+  sqlite: SQLiteDatabase,
+  migrations: Migration[] = MIGRATIONS,
+): Promise<void> {
+  // Per connessione e inefficace dentro una transazione: va impostato prima.
+  await sqlite.execAsync('PRAGMA foreign_keys = ON;');
+
+  const currentVersion = await readUserVersion(sqlite);
+  const pending = migrations
+    .filter((migration) => migration.version > currentVersion)
+    .sort((a, b) => a.version - b.version);
+
+  for (const migration of pending) {
+    await sqlite.withTransactionAsync(async () => {
+      await sqlite.execAsync(migration.sql);
+      await sqlite.execAsync(`PRAGMA user_version = ${migration.version};`);
+    });
+  }
 }
