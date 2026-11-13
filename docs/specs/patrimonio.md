@@ -65,15 +65,17 @@ Nota: le route oggi stanno in `app/` alla radice (non in `src/app/` come dice AG
 
 ## Ticket
 
-| # | Titolo | Bloccato da |
-|---|---|---|
-| 1 | Migrazioni versionate con `user_version` + jest-expo | — |
-| 2 | Schema v2, Conti e tab Patrimonio | 1 |
-| 3 | Saldi di liquidità/passività e Net worth attuale | 2 |
-| 4 | Strumenti, Movimenti, Quotazioni manuali e Posizioni | 2 |
-| 5 | Serie del Net worth, Variazione e Rendimento | 3, 4 |
-| 6 | Grafico dell'andamento con selettore periodo | 5 |
-| 7 | Fonte prezzi Yahoo: ricerca per ISIN, ultima Quotazione, storico | 4 (+ esito prototipo) |
-| 8 | Aggiornamento automatico Quotazioni e recupero storico | 6, 7 |
+Issue madre: #13.
+
+| # | Issue | Titolo | Bloccato da |
+|---|---|---|---|
+| 1 | #14 | Migrazioni versionate con `user_version` + jest-expo | — |
+| 2 | #15 | Schema v2, Conti e tab Patrimonio | 1 |
+| 3 | #16 | Saldi di liquidità/passività e Net worth attuale | 2 |
+| 4 | #17 | Strumenti, Movimenti, Quotazioni manuali e Posizioni | 2 |
+| 5 | #18 | Serie del Net worth, Variazione e Rendimento | 3, 4 |
+| 6 | #19 | Grafico dell'andamento con selettore periodo | 5 |
+| 7 | #20 | Fonte prezzi Yahoo: ricerca per ISIN, ultima Quotazione, storico | 4 (+ esito prototipo) |
+| 8 | #21 | Aggiornamento automatico Quotazioni e recupero storico | 6, 7 |
 
 Ogni ticket: branch `feat/patrimonio-<n>-<slug>`, PR verso `dev`, `npx expo lint` + `npx tsc --noEmit` (+ `npx jest` dal ticket 1) puliti, prova in Expo Go tramite la preview EAS della PR.
