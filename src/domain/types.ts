@@ -36,3 +36,16 @@ export type Subcategory = {
   name: string;
   sortOrder: number;
 };
+
+export type AccountKind = 'liquidity' | 'investment' | 'liability';
+
+export type Account = {
+  id: string;
+  name: string;
+  kind: AccountKind;
+  currency: string;
+  sortOrder: number;
+  archivedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};

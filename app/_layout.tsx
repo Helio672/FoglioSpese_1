@@ -58,6 +58,8 @@ function RootLayoutNav() {
         <Stack.Screen name="spese/nuova" options={{ title: 'Nuova spesa' }} />
         <Stack.Screen name="spese/[id]" options={{ title: 'Modifica spesa' }} />
         <Stack.Screen name="categoria/[id]" options={{ title: 'Sottocategorie' }} />
+        <Stack.Screen name="patrimonio/conto/nuovo" options={{ title: 'Nuovo conto' }} />
+        <Stack.Screen name="patrimonio/conto/[id]" options={{ title: 'Modifica conto' }} />
       </Stack>
     </ThemeProvider>
   );
