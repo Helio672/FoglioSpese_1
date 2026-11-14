@@ -49,6 +49,17 @@ export function AccountForm({ initial, submitLabel, onSubmit, onArchive }: Props
     }
   }
 
+  async function handleArchive() {
+    setFormError(null);
+    setSaving(true);
+    try {
+      await onArchive?.();
+    } catch (err) {
+      setFormError(err instanceof Error ? err.message : 'Archiviazione non riuscita.');
+      setSaving(false);
+    }
+  }
+
   function confirmArchive() {
     Alert.alert('Archivia conto', `Vuoi archiviare "${initial?.name}"? Non comparirà più nell'elenco.`, [
       { text: 'Annulla', style: 'cancel' },
@@ -56,7 +67,7 @@ export function AccountForm({ initial, submitLabel, onSubmit, onArchive }: Props
         text: 'Archivia',
         style: 'destructive',
         onPress: () => {
-          void onArchive?.();
+          void handleArchive();
         },
       },
     ]);
@@ -114,7 +125,7 @@ export function AccountForm({ initial, submitLabel, onSubmit, onArchive }: Props
         </Pressable>
 
         {onArchive ? (
-          <Pressable onPress={confirmArchive} style={styles.archiveBtn}>
+          <Pressable onPress={confirmArchive} disabled={saving} style={styles.archiveBtn}>
             <Text style={{ color: colors.danger, fontWeight: '700' }}>Archivia conto</Text>
           </Pressable>
         ) : null}
