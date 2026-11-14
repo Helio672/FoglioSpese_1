@@ -45,6 +45,19 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="patrimonio"
+        options={{
+          title: 'Patrimonio',
+          tabBarIcon: ({ color }) => (
+            <SymbolView
+              name={{ ios: 'chart.line.uptrend.xyaxis', android: 'trending_up', web: 'trending_up' }}
+              tintColor={color}
+              size={26}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
